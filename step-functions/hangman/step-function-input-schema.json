@@ -1,0 +1,422 @@
+{ "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "input"
+  ],
+  "properties": {
+    "input": {
+      "$id": "#/properties/input",
+      "type": "object",
+      "title": "The Input Schema",
+      "required": [
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "$id": "#/properties/input/properties/data",
+          "type": "object",
+          "title": "The Data Schema",
+          "required": [
+            "command",
+            "game",
+            "player",
+            "twilio"
+          ],
+          "properties": {
+            "command": {
+              "$id": "#/properties/input/properties/data/properties/command",
+              "type": "object",
+              "title": "The Command Schema",
+              "required": [
+                "source",
+                "type",
+                "arguments"
+              ],
+              "properties": {
+                "source": {
+                  "$id": "#/properties/input/properties/data/properties/command/properties/source",
+                  "type": "string",
+                  "title": "The Source Schema",
+                  "default": "",
+                  "enum": ["admin", "player"],
+                  "examples": [
+                    "player|admin"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "type": {
+                  "$id": "#/properties/input/properties/data/properties/command/properties/type",
+                  "type": "string",
+                  "title": "The Type Schema",
+                  "default": "",
+                  "enum": ["admin", "guess"],
+                  "examples": [
+                    "admin|guess"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "arguments": {
+                  "$id": "#/properties/input/properties/data/properties/command/properties/arguments",
+                  "type": "array",
+                  "title": "The Arguments Schema",
+                  "items": {
+                    "$id": "#/properties/input/properties/data/properties/command/properties/arguments/items",
+                    "type": "string",
+                    "title": "The Items Schema",
+                    "default": "",
+                    "examples": [
+                      "argument1",
+                      "argument2",
+                      "argument3"
+                    ],
+                    "pattern": "^(.*)$"
+                  }
+                }
+              }
+            },
+            "game": {
+              "$id": "#/properties/input/properties/data/properties/game",
+              "type": "object",
+              "title": "The Game Schema",
+              "required": [
+                "id",
+                "startDatetime",
+                "state",
+                "solution"
+              ],
+              "properties": {
+                "id": {
+                  "$id": "#/properties/input/properties/data/properties/game/properties/id",
+                  "type": "string",
+                  "title": "The Id Schema",
+                  "default": "",
+                  "examples": [
+                    "8a1f1be4-abf7-11e8-98d0-529269fb1459"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "startDatetime": {
+                  "$id": "#/properties/input/properties/data/properties/game/properties/startDatetime",
+                  "type": "string",
+                  "title": "The Startdatetime Schema",
+                  "default": "",
+                  "examples": [
+                    "2018-10-14T10:20:50.52Z"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "state": {
+                  "$id": "#/properties/input/properties/data/properties/game/properties/state",
+                  "type": "string",
+                  "title": "The State Schema",
+                  "default": "",
+                  "enum": ["created", "running", "over"],
+                  "examples": [
+                    "created|running|over"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "solution": {
+                  "$id": "#/properties/input/properties/data/properties/game/properties/solution",
+                  "type": "string",
+                  "title": "The Solution Schema",
+                  "default": "",
+                  "examples": [
+                    "ABCDEFGHIJKLMNOPQRST"
+                  ],
+                  "pattern": "^(.*)$"
+                }
+              }
+            },
+            "player": {
+              "$id": "#/properties/input/properties/data/properties/player",
+              "type": "object",
+              "title": "The Player Schema",
+              "required": [
+                "id",
+                "guesses",
+                "state",
+                "dateTime"
+              ],
+              "properties": {
+                "id": {
+                  "$id": "#/properties/input/properties/data/properties/player/properties/id",
+                  "type": "string",
+                  "title": "The Id Schema",
+                  "default": "",
+                  "examples": [
+                    "+19998887777"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "guesses": {
+                  "$id": "#/properties/input/properties/data/properties/player/properties/guesses",
+                  "type": "array",
+                  "title": "The Guesses Schema",
+                  "items": {
+                    "$id": "#/properties/input/properties/data/properties/player/properties/guesses/items",
+                    "type": "string",
+                    "title": "The Items Schema",
+                    "default": "",
+                    "examples": [
+                      "A",
+                      "B",
+                      "C",
+                      "D",
+                      "E",
+                      "FULLWORD1",
+                      "FULLWORD2"
+                    ],
+                    "pattern": "^(.*)$"
+                  }
+                },
+                "state": {
+                  "$id": "#/properties/input/properties/data/properties/player/properties/state",
+                  "type": "string",
+                  "title": "The State Schema",
+                  "default": "",
+                  "enum": ["registered", "live", "dead", "winner"],
+                  "examples": [
+                    "registered|live|dead|winner"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "dateTime": {
+                  "$id": "#/properties/input/properties/data/properties/player/properties/dateTime",
+                  "type": "string",
+                  "title": "The Datetime Schema",
+                  "default": "",
+                  "examples": [
+                    "2018-10-14T10:21:45.07Z"
+                  ],
+                  "pattern": "^(.*)$"
+                }
+              }
+            },
+            "twilio": {
+              "$id": "#/properties/input/properties/data/properties/twilio",
+              "type": "object",
+              "title": "The Twilio Schema",
+              "required": [
+                "ToCountry",
+                "ToState",
+                "SmsMessageSid",
+                "NumMedia",
+                "ToCity",
+                "FromZip",
+                "SmsSid",
+                "FromState",
+                "SmsStatus",
+                "FromCity",
+                "Body",
+                "FromCountry",
+                "To",
+                "ToZip",
+                "NumSegments",
+                "MessageSid",
+                "AccountSid",
+                "From",
+                "ApiVersion"
+              ],
+              "properties": {
+                "ToCountry": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/ToCountry",
+                  "type": "string",
+                  "title": "The Tocountry Schema",
+                  "default": "",
+                  "examples": [
+                    "US"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "ToState": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/ToState",
+                  "type": "string",
+                  "title": "The Tostate Schema",
+                  "default": "",
+                  "examples": [
+                    "DE"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "SmsMessageSid": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/SmsMessageSid",
+                  "type": "string",
+                  "title": "The Smsmessagesid Schema",
+                  "default": "",
+                  "examples": [
+                    "SMa0953d6b15d49da19c2a2cbdd78badd1"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "NumMedia": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/NumMedia",
+                  "type": "string",
+                  "title": "The Nummedia Schema",
+                  "default": "",
+                  "examples": [
+                    "0"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "ToCity": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/ToCity",
+                  "type": "string",
+                  "title": "The Tocity Schema",
+                  "default": "",
+                  "examples": [
+                    "DAGSBORO"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "FromZip": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/FromZip",
+                  "type": "string",
+                  "title": "The Fromzip Schema",
+                  "default": "",
+                  "examples": [
+                    "19404"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "SmsSid": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/SmsSid",
+                  "type": "string",
+                  "title": "The Smssid Schema",
+                  "default": "",
+                  "examples": [
+                    "SMa0953d6b15d49da19c2a2cbdd78badd1"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "FromState": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/FromState",
+                  "type": "string",
+                  "title": "The Fromstate Schema",
+                  "default": "",
+                  "examples": [
+                    "PA"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "SmsStatus": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/SmsStatus",
+                  "type": "string",
+                  "title": "The Smsstatus Schema",
+                  "default": "",
+                  "examples": [
+                    "received"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "FromCity": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/FromCity",
+                  "type": "string",
+                  "title": "The Fromcity Schema",
+                  "default": "",
+                  "examples": [
+                    "NORRISTOWN"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "Body": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/Body",
+                  "type": "string",
+                  "title": "The Body Schema",
+                  "default": "",
+                  "examples": [
+                    "Hi Brian"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "FromCountry": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/FromCountry",
+                  "type": "string",
+                  "title": "The Fromcountry Schema",
+                  "default": "",
+                  "examples": [
+                    "US"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "To": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/To",
+                  "type": "string",
+                  "title": "The To Schema",
+                  "default": "",
+                  "examples": [
+                    "+13027322185"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "ToZip": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/ToZip",
+                  "type": "string",
+                  "title": "The Tozip Schema",
+                  "default": "",
+                  "examples": [
+                    "19945"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "NumSegments": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/NumSegments",
+                  "type": "string",
+                  "title": "The Numsegments Schema",
+                  "default": "",
+                  "examples": [
+                    "1"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "MessageSid": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/MessageSid",
+                  "type": "string",
+                  "title": "The Messagesid Schema",
+                  "default": "",
+                  "examples": [
+                    "SMa0953d6b15d49da19c2a2cbdd78badd1"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "AccountSid": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/AccountSid",
+                  "type": "string",
+                  "title": "The Accountsid Schema",
+                  "default": "",
+                  "examples": [
+                    "ACfe8d611a7b2bf7b16f84c4af5ff98b11"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "From": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/From",
+                  "type": "string",
+                  "title": "The From Schema",
+                  "default": "",
+                  "examples": [
+                    "+16104056406"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "ApiVersion": {
+                  "$id": "#/properties/input/properties/data/properties/twilio/properties/ApiVersion",
+                  "type": "string",
+                  "title": "The Apiversion Schema",
+                  "default": "",
+                  "examples": [
+                    "2010-04-01"
+                  ],
+                  "pattern": "^(.*)$"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
