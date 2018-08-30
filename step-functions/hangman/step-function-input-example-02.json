@@ -1,0 +1,51 @@
+{
+  "input": {
+    "data": {
+      "command": {
+        "source": "player",
+        "type": "guess",
+        "arguments": [
+          "E"
+        ]
+      },
+      "game": {
+        "id": "8a1f1be4-abf7-11e8-98d0-529269fb1459",
+        "startDatetime": "2018-10-14T10:20:50.52Z",
+        "state": "running",
+        "solution": "kubernetes"
+      },
+      "player": {
+        "id": "+16104056406",
+        "guesses": [
+          "S",
+          "A",
+          "C",
+          "I"
+        ],
+        "state": "live",
+        "dateTime": "2018-10-14T10:21:45.07Z"
+      },
+      "twilio": {
+        "ToCountry": "US",
+        "ToState": "DE",
+        "SmsMessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
+        "NumMedia": "0",
+        "ToCity": "DAGSBORO",
+        "FromZip": "19404",
+        "SmsSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
+        "FromState": "PA",
+        "SmsStatus": "received",
+        "FromCity": "NORRISTOWN",
+        "Body": "E",
+        "FromCountry": "US",
+        "To": "+13027322185",
+        "ToZip": "19945",
+        "NumSegments": "1",
+        "MessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
+        "AccountSid": "ACfe8d611a7b2bf7b16f84c4af5ff98b11",
+        "From": "+16104056406",
+        "ApiVersion": "2010-04-01"
+      }
+    }
+  }
+}
