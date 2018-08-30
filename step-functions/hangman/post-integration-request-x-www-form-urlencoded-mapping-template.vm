@@ -20,5 +20,5 @@
 #set($data = "${data}${twilio} }")
 {
    "input": "$util.escapeJavaScript("{$data}")",
-   "stateMachineArn": "arn:aws:states:us-east-1:834108620287:stateMachine:PythonEchoer"
+   "stateMachineArn": "arn:aws:states:us-east-1:xxxxxxxxxxxxxxxxx:stateMachine:PythonEchoer"
 }
