@@ -2,8 +2,8 @@
   "input": {
     "data": {
       "command": {
-        "source": "player|admin",
-        "type": "admin|guess",
+        "type": "player|admin",
+        "operation": "admin|guess|help|game|register",
         "arguments": [
           "argument1",
           "argument2",
