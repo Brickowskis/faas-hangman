@@ -10,9 +10,11 @@
         #else
             #set( $val = '' )
         #end
-        #set($twilio = "${twilio}""${key}"": ""${val}""")
-        #if($foreach.hasNext)
-           #set($twilio = "${twilio},")
+        #if( $key != "AccountSid")
+           #set($twilio = "${twilio}""${key}"": ""${val}""")
+           #if($foreach.hasNext)
+              #set($twilio = "${twilio},")
+           #end
         #end
     #end
 #end
