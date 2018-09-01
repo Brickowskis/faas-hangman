@@ -11,7 +11,7 @@
       "game": {
         "id": "8a1f1be4-abf7-11e8-98d0-529269fb1459",
         "startDatetime": "2018-10-14T10:20:50.52Z",
-        "state": "running",
+        "gameState": "running",
         "solution": "kubernetes"
       },
       "player": {
@@ -22,7 +22,7 @@
           "C",
           "I"
         ],
-        "state": "live",
+        "playerState": "live",
         "dateTime": "2018-10-14T10:21:45.07Z"
       },
       "twilio": {
