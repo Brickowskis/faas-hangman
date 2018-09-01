@@ -1,4 +1,4 @@
-import logging, uuid, datetime, boto3, json
+import logging, uuid, datetime, boto3
 from botocore.exceptions import ClientError
 
 logger = logging.getLogger()
