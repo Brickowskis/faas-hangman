@@ -23,21 +23,12 @@ def handler(event, context):
         game = response["Items"][0]
         logger.info('Found existing game record {}', game)
     else:
-        # generate the first and only game id. Starting a new game will reuse this uuid
-        print("Game does not exist!")
-        game["Id"] = str(uuid.uuid4())
-        logger.info('No existing game record. Creating game id {}', game["Id"])
+        logger.warning('No existing game record to stop')
 
     # If the game state is "over", update the game state to "created"
-    if game["gameState"] == "over":
-        # generate timestamp
-        game["startDatetime"] = str(datetime.datetime.utcnow().isoformat())
-
-        # set state to created
-        game["gameState"] = 'created'
-
-        # set solution to the command
-        game["solution"] = event["data"]["command"]["arguments"][1]
+    if game["gameState"] != "over":
+        # set state to over
+        game["gameState"] = 'over'
 
         try:
             # upsert the game - DynamoDB call
@@ -45,11 +36,9 @@ def handler(event, context):
                 Key={
                     'Id': game["Id"]
                 },
-                UpdateExpression='SET startDateTime = :std, gameState = :st, solution = :sln',
+                UpdateExpression='SET gameState = :st',
                 ExpressionAttributeValues={
-                    ':std': game["startDatetime"],
-                    ':st': game["gameState"],
-                    ':sln': game["solution"],
+                    ':st': game["gameState"]
                 }
             )
         except ClientError as e:

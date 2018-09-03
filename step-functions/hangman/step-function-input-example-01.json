@@ -2,8 +2,8 @@
   "input": {
     "data": {
       "command": {
-        "type": "player|admin",
-        "operation": "admin|guess|help|game|register",
+        "source": "player|admin",
+        "type": "admin|guess",
         "arguments": [
           "argument1",
           "argument2",
@@ -13,7 +13,7 @@
       "game": {
         "id": "8a1f1be4-abf7-11e8-98d0-529269fb1459",
         "startDatetime": "2018-10-14T10:20:50.52Z",
-        "gameState": "created|running|over",
+        "state": "created|running|over",
         "solution": "ABCDEFGHIJKLMNOPQRST"
       },
       "player": {
@@ -27,7 +27,7 @@
           "FULLWORD1",
           "FULLWORD2"
         ],
-        "playerState": "registered|live|dead|winner",
+        "state": "registered|live|dead|winner",
         "dateTime": "2018-10-14T10:21:45.07Z"
       },
       "twilio": {
@@ -47,7 +47,7 @@
         "ToZip": "19945",
         "NumSegments": "1",
         "MessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
-        "AccountSid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "AccountSid": "ACfe8d611a7b2bf7b16f84c4af5ff98b11",
         "From": "+16104056406",
         "ApiVersion": "2010-04-01"
       }

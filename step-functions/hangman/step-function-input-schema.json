@@ -84,7 +84,7 @@
               "required": [
                 "id",
                 "startDatetime",
-                "gameState",
+                "state",
                 "solution"
               ],
               "properties": {
@@ -108,10 +108,10 @@
                   ],
                   "pattern": "^(.*)$"
                 },
-                "gameState": {
-                  "$id": "#/properties/input/properties/data/properties/game/properties/gameState",
+                "state": {
+                  "$id": "#/properties/input/properties/data/properties/game/properties/state",
                   "type": "string",
-                  "title": "The Game State Schema",
+                  "title": "The State Schema",
                   "default": "",
                   "enum": ["created", "running", "over"],
                   "examples": [
@@ -138,7 +138,7 @@
               "required": [
                 "id",
                 "guesses",
-                "playerState",
+                "state",
                 "dateTime"
               ],
               "properties": {
@@ -173,10 +173,10 @@
                     "pattern": "^(.*)$"
                   }
                 },
-                "playerState": {
-                  "$id": "#/properties/input/properties/data/properties/player/properties/playerState",
+                "state": {
+                  "$id": "#/properties/input/properties/data/properties/player/properties/state",
                   "type": "string",
-                  "title": "The Player State Schema",
+                  "title": "The State Schema",
                   "default": "",
                   "enum": ["registered", "live", "dead", "winner"],
                   "examples": [
@@ -388,7 +388,7 @@
                   "title": "The Accountsid Schema",
                   "default": "",
                   "examples": [
-                    "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                    "ACfe8d611a7b2bf7b16f84c4af5ff98b11"
                   ],
                   "pattern": "^(.*)$"
                 },

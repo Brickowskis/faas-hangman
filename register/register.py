@@ -7,10 +7,10 @@ CRLB = "%0a"
 def lambda_handler(event, context):
     to_number = event['To']
     from_number = event['From']
-    logging.info('Received registration request for {from_number}')
+    logging.info(f'Received registration request for {from_number}')
 
     return build_response("Successfully registered")
 
 
 def build_response(body):
-    return '<?xml version="1.0" encoding="UTF-8"?><Response><Sms>{body}</Sms></Response>'
+    return f'<?xml version="1.0" encoding="UTF-8"?><Response><Sms>{body}</Sms></Response>'
