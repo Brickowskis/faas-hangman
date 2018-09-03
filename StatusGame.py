@@ -23,26 +23,7 @@ def handler(event, context):
         game = response["Items"][0]
         logger.info('Found existing game record {}', game)
     else:
-        logger.warning('No existing game record to stop')
-
-    # If the game state is "over", update the game state to "created"
-    if game["gameState"] != "over":
-        # set state to over
-        game["gameState"] = 'over'
-
-        try:
-            # upsert the game - DynamoDB call
-            response = hangmanGame.update_item(
-                Key={
-                    'Id': game["Id"]
-                },
-                UpdateExpression='SET gameState = :st',
-                ExpressionAttributeValues={
-                    ':st': game["gameState"]
-                }
-            )
-        except ClientError as e:
-            print("Unexpected error: %s" % e)
+        logger.warning('No existing game record')
 
     event["data"]["game"] = game
 

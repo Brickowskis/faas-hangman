@@ -5,7 +5,7 @@
         "type": "admin",
         "operation": "game",
         "arguments": [
-          "stop"
+          "status"
         ]
       },
       "twilio": {
@@ -19,7 +19,7 @@
         "FromState": "PA",
         "SmsStatus": "received",
         "FromCity": "NORRISTOWN",
-        "Body": "stop game",
+        "Body": "game status",
         "FromCountry": "US",
         "To": "+13027322185",
         "ToZip": "19945",
