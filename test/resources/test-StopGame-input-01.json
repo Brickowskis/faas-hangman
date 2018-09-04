@@ -8,6 +8,15 @@
           "stop"
         ]
       },
+      "game": {
+      },
+      "player": {
+      },
+      "errors": {
+      },
+      "response": {
+        "sms": ""
+      },
       "twilio": {
         "ToCountry": "US",
         "ToState": "DE",
