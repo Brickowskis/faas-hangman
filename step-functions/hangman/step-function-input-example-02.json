@@ -2,32 +2,27 @@
   "input": {
     "data": {
       "command": {
-        "type": "player|admin",
-        "operation": "admin|guess|help|game|register",
+        "source": "player",
+        "type": "guess",
         "arguments": [
-          "argument1",
-          "argument2",
-          "argument3"
+          "E"
         ]
       },
       "game": {
         "id": "8a1f1be4-abf7-11e8-98d0-529269fb1459",
         "startDatetime": "2018-10-14T10:20:50.52Z",
-        "state": "created|running|over",
-        "solution": "ABCDEFGHIJKLMNOPQRST"
+        "state": "running",
+        "solution": "kubernetes"
       },
       "player": {
-        "id": "+19998887777",
+        "id": "+16104056406",
         "guesses": [
+          "S",
           "A",
-          "B",
           "C",
-          "D",
-          "E",
-          "FULLWORD1",
-          "FULLWORD2"
+          "I"
         ],
-        "state": "registered|live|dead|winner",
+        "state": "live",
         "dateTime": "2018-10-14T10:21:45.07Z"
       },
       "twilio": {
@@ -41,13 +36,13 @@
         "FromState": "PA",
         "SmsStatus": "received",
         "FromCity": "NORRISTOWN",
-        "Body": "Hi Brian",
+        "Body": "E",
         "FromCountry": "US",
         "To": "+13027322185",
         "ToZip": "19945",
         "NumSegments": "1",
         "MessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
-        "AccountSid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "AccountSid": "xxxxxxxxxxxxxxxxxxxxxxxxx",
         "From": "+16104056406",
         "ApiVersion": "2010-04-01"
       }
