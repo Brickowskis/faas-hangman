@@ -1,5 +1,6 @@
 import logging, uuid, datetime, boto3
 from botocore.exceptions import ClientError
+from boto3.dynamodb.conditions import Attr
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -8,53 +9,83 @@ logger.setLevel(logging.INFO)
 def handler(event, context):
     logger.info('Handling event {} - context {}', event, context)
 
-    # Initial game state
-    game = {
-        "gameState": "over"
-    }
+    responseMessage = event['data']['response']['sms']
+    solution = event['data']['command']['arguments'][1]
+    errors = event['data']['errors']
 
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-    hangmanGame = dynamodb.Table('HangmanGame')
+    gameTable = dynamodb.Table('HangmanGame')
 
-    # Get the game from the game table
-    response = hangmanGame.scan()
-    gameExists = len(response["Items"]) == 1
-    if gameExists:
-        game = response["Items"][0]
-        logger.info('Found existing game record {}', game)
-    else:
-        # generate the first and only game id. Starting a new game will reuse this uuid
-        print("Game does not exist!")
-        game["Id"] = str(uuid.uuid4())
-        logger.info('No existing game record. Creating game id {}', game["Id"])
+    # Get created games from the game table - should be 0 or 1
+    response = gameTable.scan(
+        FilterExpression=Attr('gameState').ne('over')
+    )
 
-    # If the game state is "over", update the game state to "created"
-    if game["gameState"] == "over":
-        # generate timestamp
-        game["startDatetime"] = str(datetime.datetime.utcnow().isoformat())
+    createdGames = list()
+    runningGames = list()
+    for game in response['Items']:
+        if game['gameState'] == 'created':
+            createdGames.append(game)
+        if game['gameState'] == 'running':
+            runningGames.append(game)
 
-        # set state to created
-        game["gameState"] = 'created'
-
-        # set solution to the command
-        game["solution"] = event["data"]["command"]["arguments"][1]
-
+    if len(createdGames) == 0 and len(runningGames) == 0:
         try:
-            # upsert the game - DynamoDB call
-            response = hangmanGame.update_item(
-                Key={
-                    'Id': game["Id"]
-                },
-                UpdateExpression='SET startDateTime = :std, gameState = :st, solution = :sln',
-                ExpressionAttributeValues={
-                    ':std': game["startDatetime"],
-                    ':st': game["gameState"],
-                    ':sln': game["solution"],
-                }
-            )
+            game = create_game(solution, gameTable)
+            responseMessage = append_message(responseMessage, 'Game created')
         except ClientError as e:
-            print("Unexpected error: %s" % e)
+            errors = e
+            responseMessage = append_message(responseMessage, f'Error [{e}]')
 
-    event["data"]["game"] = game
+    if len(runningGames) == 1:
+        game = runningGames[0]
+        responseMessage = append_message(responseMessage, 'A game is already running')
+
+    if len(createdGames) == 1:
+        game = createdGames[0]
+        responseMessage = responseMessage + '\n' + 'A game is already created'
+
+
+    responseMessage = (
+        f"{responseMessage}" +
+        f"\nId [{game['Id']}]" +
+        f"\nStart Datetime [{game['startDatetime']}]" +
+        f"\nGame State [{game['gameState']}]" +
+        f"\nSolution [{game['solution']}]"
+    )
+
+    event['data']['errors'] = errors
+    event['data']['game'] = game
+    event['data']['response']['sms'] = responseMessage
 
     return event
+
+
+def create_game(solution, gameTable):
+    game = {
+        'Id': str(uuid.uuid4()),
+        # generate timestamp
+        'startDatetime': str(datetime.datetime.utcnow().isoformat()),
+        # set state to created
+        'gameState': 'created',
+        # set solution to the command
+        'solution': solution
+    }
+
+    # upsert the game - DynamoDB call
+    response = gameTable.update_item(
+        Key={
+            'Id': game['Id']
+        },
+        UpdateExpression='SET startDatetime = :std, gameState = :st, solution = :sln',
+        ExpressionAttributeValues={
+            ':std': game['startDatetime'],
+            ':st': game['gameState'],
+            ':sln': game['solution'],
+        }
+    )
+    return game
+
+
+def append_message(response, message):
+    return f"{response}\n{message}"

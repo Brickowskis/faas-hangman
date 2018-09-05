@@ -25,9 +25,9 @@ def lambda_handler(event, context):
     from_number = event['From']
     body = event['Body']
 
-    logging.info('Messaged directed to {to_number} from {from_number} with body {body}')
+    logging.info(f'Messaged directed to {to_number} from {from_number} with body {body}')
 
     action = body.split()[0].strip().lower()
-    logging.info('Found action {action}')
+    logging.info(f'Found action {action}')
     event['route'] = routes.get(action, default())
     return event
