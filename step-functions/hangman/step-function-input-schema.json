@@ -84,7 +84,7 @@
               "required": [
                 "id",
                 "startDatetime",
-                "state",
+                "gameState",
                 "solution"
               ],
               "properties": {
@@ -108,10 +108,10 @@
                   ],
                   "pattern": "^(.*)$"
                 },
-                "state": {
-                  "$id": "#/properties/input/properties/data/properties/game/properties/state",
+                "gameState": {
+                  "$id": "#/properties/input/properties/data/properties/game/properties/gameState",
                   "type": "string",
-                  "title": "The State Schema",
+                  "title": "The Game State Schema",
                   "default": "",
                   "enum": ["created", "running", "over"],
                   "examples": [
@@ -138,7 +138,7 @@
               "required": [
                 "id",
                 "guesses",
-                "state",
+                "playerState",
                 "dateTime"
               ],
               "properties": {
@@ -173,10 +173,10 @@
                     "pattern": "^(.*)$"
                   }
                 },
-                "state": {
-                  "$id": "#/properties/input/properties/data/properties/player/properties/state",
+                "playerState": {
+                  "$id": "#/properties/input/properties/data/properties/player/properties/playerState",
                   "type": "string",
-                  "title": "The State Schema",
+                  "title": "The Player State Schema",
                   "default": "",
                   "enum": ["registered", "live", "dead", "winner"],
                   "examples": [
