@@ -17,9 +17,8 @@ def lambda_handler(event, context):
         event['data']['command']['type'] = 'admin'
         event['data']['command']['operation'] = 'game'
         event['data']['command']['arguments'] = body.split()[1:]
-        event['data']['response']['sms'] = 'You do not have permission to execute this command.'
         if not isAdminNumber(from_number):
-            errors = 'test'
+            errors = f'{from_number} does not have access to execute admin commands.'
             event['data']['response']['sms'] = 'You do not have permission to execute this command.'
     elif action == 'register':
         event['data']['command']['type'] = 'player'
