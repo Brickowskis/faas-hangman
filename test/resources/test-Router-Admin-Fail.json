@@ -1,0 +1,43 @@
+{
+  "input": {
+    "data": {
+      "command": {
+        "type": "admin",
+        "operation": "game",
+        "arguments": [
+          "start"
+        ]
+      },
+      "game": {
+      },
+      "player": {
+      },
+      "errors": {
+      },
+      "response": {
+        "sms": ""
+      },
+      "twilio": {
+        "ToCountry": "US",
+        "ToState": "DE",
+        "SmsMessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
+        "NumMedia": "0",
+        "ToCity": "DAGSBORO",
+        "FromZip": "19404",
+        "SmsSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
+        "FromState": "PA",
+        "SmsStatus": "received",
+        "FromCity": "NORRISTOWN",
+        "Body": "stop game",
+        "FromCountry": "US",
+        "To": "+13027322185",
+        "ToZip": "19945",
+        "NumSegments": "1",
+        "MessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
+        "AccountSid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "From": "+11234567890",
+        "ApiVersion": "2010-04-01"
+      }
+    }
+  }
+}
