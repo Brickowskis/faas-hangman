@@ -2,11 +2,6 @@
   "input": {
     "data": {
       "command": {
-        "type": "admin",
-        "operation": "game",
-        "arguments": [
-          "start"
-        ]
       },
       "game": {
       },
@@ -28,14 +23,14 @@
         "FromState": "PA",
         "SmsStatus": "received",
         "FromCity": "NORRISTOWN",
-        "Body": "stop game",
+        "Body": "game start",
         "FromCountry": "US",
         "To": "+13027322185",
         "ToZip": "19945",
         "NumSegments": "1",
         "MessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
         "AccountSid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "From": "+16104056406",
+        "From": "+13025109165",
         "ApiVersion": "2010-04-01"
       }
     }
