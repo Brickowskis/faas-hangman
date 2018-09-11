@@ -5,8 +5,7 @@ CRLB = "%0a"
 
 
 def handler(event, context):
-    #to_number = event['To']
-    #from_number = event['From']
+    player_name = event['data']['command']['arguments'][0]
     #logging.info(f'Received registration request for {from_number}')
 
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
@@ -14,7 +13,9 @@ def handler(event, context):
 
     playerTable.put_item(
         Item={
-            'phoneNumber': '6105551234'
+            'phoneNumber': '6105551234',
+            'playerState': 'REGISTERED',
+            'playerName': player_name
         }
     )
 

@@ -2,10 +2,10 @@
   "input": {
     "data": {
       "command": {
-        "type": "admin",
-        "operation": "game",
+        "type": "player",
+        "operation": "register",
         "arguments": [
-          "status"
+          "Ice Man"
         ]
       },
       "game": {
