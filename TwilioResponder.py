@@ -36,4 +36,7 @@ def handler(event, context):
         to    = event['data']['twilio']['From']
     )
 
+    if (message.error_code != None):
+        logger.error('Error sending Twilio  message : code{} - message {}', message.error_code, message.error_message)
+
     return event
