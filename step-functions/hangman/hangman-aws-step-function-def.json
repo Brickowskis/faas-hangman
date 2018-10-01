@@ -1,0 +1,163 @@
+{
+  "Comment": "Hangman",
+  "StartAt": "SMSRouter",
+  "States": {
+     "SMSRouter" : {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:834108620287:function:SMSRouter",
+        "Next": "RouterChoice"
+     },
+    "RouterChoice": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "And": [
+            {
+              "Variable": "$.data.command.type",
+              "StringEquals": "admin"
+            },
+            {
+              "Variable": "$.data.command.operation",
+              "StringEquals": "game"
+            },
+            {
+              "Variable": "$.data.command.arguments[0]",
+              "StringEquals": "create"
+            }
+          ],
+          "Next": "GameCreate"
+        },
+        {
+          "And": [
+            {
+              "Variable": "$.data.command.type",
+              "StringEquals": "admin"
+            },
+            {
+              "Variable": "$.data.command.operation",
+              "StringEquals": "game"
+            },
+            {
+              "Variable": "$.data.command.arguments[0]",
+              "StringEquals": "start"
+            }
+          ],
+          "Next": "GameStart"
+        },
+        {
+          "And": [
+            {
+              "Variable": "$.data.command.type",
+              "StringEquals": "admin"
+            },
+            {
+              "Variable": "$.data.command.operation",
+              "StringEquals": "game"
+            },
+            {
+              "Variable": "$.data.command.arguments[0]",
+              "StringEquals": "stop"
+            }
+          ],
+          "Next": "GameStop"
+        },
+        {
+          "And": [
+            {
+              "Variable": "$.data.command.type",
+              "StringEquals": "admin"
+            },
+            {
+              "Variable": "$.data.command.operation",
+              "StringEquals": "game"
+            },
+            {
+              "Variable": "$.data.command.arguments[0]",
+              "StringEquals": "status"
+            }
+          ],
+          "Next": "GameStatus"
+        },
+        {
+          "And": [
+            {
+              "Variable": "$.data.command.type",
+              "StringEquals": "player"
+            },
+            {
+              "Variable": "$.data.command.operation",
+              "StringEquals": "register"
+            }
+          ],
+          "Next": "PlayerRegister"
+        },
+        {
+          "And": [
+            {
+              "Variable": "$.data.command.type",
+              "StringEquals": "player"
+            },
+            {
+              "Variable": "$.data.command.operation",
+              "StringEquals": "status"
+            }
+          ],
+          "Next": "PlayerStatus"
+        },
+        {
+          "And": [
+            {
+              "Variable": "$.data.command.type",
+              "StringEquals": "player"
+            },
+            {
+              "Variable": "$.data.command.operation",
+              "StringEquals": "guess"
+            }
+          ],
+          "Next": "PlayerGuess"
+        }
+      ]
+    },
+    "GameCreate": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:834108620287:function:GameCreate",
+      "Next": "SMSResponder"
+    },
+    "GameStart": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:834108620287:function:GameStart",
+      "Next": "SMSResponder"
+    },
+    "GameStop": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:834108620287:function:GameStop",
+      "Next": "SMSResponder"
+    },
+    "GameStatus": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:834108620287:function:GameStatus",
+      "Next": "SMSResponder"
+    },
+    "PlayerRegister": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:834108620287:function:PlayerRegister",
+      "Next": "SMSResponder"
+    },
+    "PlayerStatus": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:834108620287:function:PlayerStatus",
+      "Next": "SMSResponder"
+    },
+    "PlayerGuess": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:834108620287:function:PlayerGuess",
+      "Next": "SMSResponder"
+    },
+    "SMSResponder": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:834108620287:function:SMSReponder",
+      "End": true
+    }
+  }
+}
