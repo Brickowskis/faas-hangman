@@ -1,4 +1,5 @@
 import logging, boto3
+from boto3.dynamodb.conditions import Attr
 
 # https://support.twilio.com/hc/en-us/articles/223181468-How-do-I-Add-a-Line-Break-in-my-SMS-or-MMS-Message-
 CRLB = "%0a"
@@ -12,10 +13,21 @@ def handler(event, context):
 
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
     player_table = dynamodb.Table('HangmanPlayer')
+    game_table = dynamodb.Table('HangmanGame')
+
+    response = game_table.scan(
+        FilterExpression=Attr('gameState').ne('over')
+    )
+    running_games = list()
+    for game in response['Items']:
+        if game['gameState'] == 'running':
+            running_games.append(game)
+
+    game = running_games[0]
     response = player_table.get_item(
         Key={
             'phoneNumber': phone_number,
-            'gameId': 'e97ceae3-dd84-4042-b3d8-57ceb54b6e64'
+            'gameId': game['Id']
         }
     )
     item = response['Item']
