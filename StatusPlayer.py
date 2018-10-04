@@ -1,4 +1,6 @@
-import logging, boto3
+import logging
+import boto3
+import json
 from boto3.dynamodb.conditions import Attr
 
 # https://support.twilio.com/hc/en-us/articles/223181468-How-do-I-Add-a-Line-Break-in-my-SMS-or-MMS-Message-
@@ -30,18 +32,20 @@ def handler(event, context):
             'gameId': game['Id']
         }
     )
-    item = response['Item']
-    print(item)
+    player_info = response['Item']
+    print(player_info)
 
-    #phoneNumber/String
-    #guesses
-    #playerState
-    #lastGuessDatetime
-    #playerName
+    guesses = json.loads(player_info['guesses'])
+    lives_remaining = 6 - len(guesses['wrong'])
 
-    #lives remaining
-    #guess attempted
-    #current solve state
+    print(lives_remaining)
+
+    current_solve_state = game['solution']
+    unguessed_letters = (set(list(current_solve_state)) - set(list(guesses['correct'])))
+    for letter in unguessed_letters:
+        current_solve_state = current_solve_state.replace(letter, "*")
+
+    print(current_solve_state)
 
     return build_response(f'{CRLB}{CRLB}'+letter_available())
 
