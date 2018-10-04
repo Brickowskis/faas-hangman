@@ -35,7 +35,8 @@ def handler(event, context):
             'phoneNumber': phone_number,
             'gameId': game['Id'],
             'playerState': 'REGISTERED',
-            'playerName': player_name
+            'playerName': player_name,
+            'guesses': '{ \"correct\": [], \"wrong\" : [] }'
         }
     )
 

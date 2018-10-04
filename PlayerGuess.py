@@ -10,7 +10,7 @@ logger.setLevel(logging.INFO)
 
 
 def handler(event, context):
-    guess = event['data']['command']['arguments']
+    guess = event['data']['command']['arguments'][0]
     from_number = event['data']['twilio']['From']
 
     logging.info("Received guess {} from {}", guess, from_number)
@@ -60,18 +60,18 @@ def process_guess(game, player, guess, player_table):
         if guess == solution:
             correct_guesses.append(guess)
             guesses['correct'] = correct_guesses
-            update_guesses(player, json.dump(guesses), player_table)
+            update_guesses(player, json.dumps(guesses), player_table)
             mark_winner(player, player_table)
         elif guess in solution:
             correct_guesses.append(guess)
             guesses['correct'] = correct_guesses
-            update_guesses(player, json.dump(guesses), player_table)
+            update_guesses(player, json.dumps(guesses), player_table)
             if is_winner(solution, correct_guesses):
                 mark_winner(player, player_table)
         else:
             wrong_guesses.append(guess)
             guesses['wrong'] = wrong_guesses
-            update_guesses(player, json.dump(guesses), player_table)
+            update_guesses(player, json.dumps(guesses), player_table)
 
 
 def update_guesses(player, guesses, player_table):
