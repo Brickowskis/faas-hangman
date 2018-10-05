@@ -1,13 +1,9 @@
-import logging, uuid, datetime, boto3, json
+import logging, boto3
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Attr
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-
 def handler(event, context):
-    logger.info('Handling event {} - context {}', event, context)
+    logging.info(f'Handling event {event} - context {context}')
 
     responseMessage = event["data"]["response"]["sms"]
     errors = event["data"]["errors"]
@@ -52,6 +48,7 @@ def handler(event, context):
 
 
 def start_game(game, gameTable):
+    game['gameState'] = 'running'
     # upsert the game - DynamoDB call
     response = gameTable.update_item(
         Key={
@@ -59,7 +56,7 @@ def start_game(game, gameTable):
         },
         UpdateExpression='SET gameState = :st',
         ExpressionAttributeValues={
-            ':st': 'running'
+            ':st': game['gameState']
         }
     )
 
