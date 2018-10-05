@@ -7,7 +7,7 @@ logger.setLevel(logging.INFO)
 
 def handler(event, context):
     ssm = boto3.client('ssm')
-    logger.info('Handling event {} - context {}', event, context)
+    logger.info(f'Handling event {event} - context {context}')
 
     errors = event['data']['errors']
     responseMessage = event['data']['response']['sms']

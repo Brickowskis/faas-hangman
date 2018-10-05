@@ -2,12 +2,8 @@ import logging, uuid, datetime, boto3
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Attr
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-
 def handler(event, context):
-    logger.info('Handling event {} - context {}', event, context)
+    logging.info(f'Handling event {event} - context {context}')
 
     responseMessage = event['data']['response']['sms']
     solution = event['data']['command']['arguments'][1]

@@ -10,7 +10,7 @@ class TestStringMethods(unittest.TestCase):
         input = self.loadEvent("./test/resources/test-StatusGame-input-01.json")
         event = StatusGame.handler(input["input"], {})
         print(event)
-        self.assertEqual(event["data"]["game"]["gameState"], "created")
+        self.assertEqual(event["data"]["game"]["gameState"], "running")
 
     def loadEvent(self, jsonFilename):
         f = open(jsonFilename)

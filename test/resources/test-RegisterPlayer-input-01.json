@@ -2,8 +2,10 @@
   "input": {
     "data": {
       "command": {
+        "type": "player",
+        "operation": "register",
         "arguments": [
-          "l"
+          "Ice Man"
         ]
       },
       "game": {
@@ -26,7 +28,7 @@
         "FromState": "PA",
         "SmsStatus": "received",
         "FromCity": "NORRISTOWN",
-        "Body": "a",
+        "Body": "game status",
         "FromCountry": "US",
         "To": "+13027322185",
         "ToZip": "19945",
