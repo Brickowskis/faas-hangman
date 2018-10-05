@@ -5,13 +5,9 @@ from boto3.dynamodb.conditions import Attr
 
 # https://support.twilio.com/hc/en-us/articles/223181468-How-do-I-Add-a-Line-Break-in-my-SMS-or-MMS-Message-
 CRLB = "%0a"
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
 
 def handler(event, context):
-    logger.info('Handling event {} - context {}', event, context)
-    phone_number = event['data']['twilio']['From']
+    logging.info('Handling event {} - context {}', event, context)
 
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
     player_table = dynamodb.Table('HangmanPlayer')
@@ -26,32 +22,37 @@ def handler(event, context):
             running_games.append(game)
 
     game = running_games[0]
+    phone_number = event['data']['twilio']['From']
     response = player_table.get_item(
         Key={
             'phoneNumber': phone_number,
             'gameId': game['Id']
         }
     )
-    player_info = response['Item']
-    print(player_info)
 
+    # Get the number of lives remaining
+    player_info = response['Item']
     guesses = json.loads(player_info['guesses'])
     lives_remaining = 6 - len(guesses['wrong'])
 
-    print(lives_remaining)
-
+    # Get the current solution state
     current_solve_state = game['solution']
     unguessed_letters = (set(list(current_solve_state)) - set(list(guesses['correct'])))
     for letter in unguessed_letters:
-        current_solve_state = current_solve_state.replace(letter, "*")
+        current_solve_state = current_solve_state.replace(letter, "_")
 
-    print(current_solve_state)
+    current_solve_state = " ".join(current_solve_state.upper())
+    # Build the response message
+    response_message = event['data']['response']['sms']
+    response_message = (
+        f"{response_message}" +
+        f"\nLives Remaining [{lives_remaining}]" +
+        f"\nWord [{ current_solve_state }]" +
+        f"\nMisses [{guesses['wrong']}]"
+    )
 
-    return build_response(f'{CRLB}{CRLB}'+letter_available())
+    event['data']['game'] = game
+    event['data']['response']['sms'] = response_message
 
+    return event
 
-def build_response(body):
-    return f'<?xml version="1.0" encoding="UTF-8"?><Response><Sms>{body}</Sms></Response>'
-
-def letter_available():
-    return f'A B C D E F G H I J L M N{CRLB}O P Q R S T U V W X Y Z'
