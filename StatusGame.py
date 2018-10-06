@@ -3,7 +3,7 @@ import logging
 from boto3.dynamodb.conditions import Attr
 
 def handler(event, context):
-    logging.info('Handling event {event} - context {context}')
+    logging.info(f'Handling event {event} - context {context}')
 
     responseMessage = event['data']['response']['sms']
     errors = event['data']['errors']
