@@ -1,13 +1,9 @@
-import logging, uuid, datetime, boto3, json
+import logging, boto3
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Attr
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-
 def handler(event, context):
-    logger.info('Handling event {} - context {}', event, context)
+    logging.info(f'Handling event {event} - context {context}')
 
     responseMessage = event["data"]["response"]["sms"]
     errors = event["data"]["errors"]
@@ -31,7 +27,6 @@ def handler(event, context):
     if len(runningGames) == 1:
         try:
             game = runningGames[0]
-            game['gameState'] = 'over'
             stop_game(game, gameTable)
             responseMessage = append_message(responseMessage, 'Game stopped', game)
         except ClientError as e:
@@ -54,6 +49,7 @@ def handler(event, context):
 
 
 def stop_game(game, gameTable):
+    game['gameState'] = 'over'
     # upsert the game - DynamoDB call
     response = gameTable.update_item(
         Key={
