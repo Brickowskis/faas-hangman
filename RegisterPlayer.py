@@ -4,12 +4,9 @@ from boto3.dynamodb.conditions import Attr
 
 # https://support.twilio.com/hc/en-us/articles/223181468-How-do-I-Add-a-Line-Break-in-my-SMS-or-MMS-Message-
 CRLB = "%0a"
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
 
 def handler(event, context):
-    logger.info('Handling event {} - context {}', event, context)
+    logging.info(f'Handling event {event} - context {context}')
 
     player_name = event['data']['command']['arguments'][0]
     phone_number = event['data']['twilio']['From']
