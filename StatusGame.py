@@ -2,12 +2,8 @@ import boto3
 import logging
 from boto3.dynamodb.conditions import Attr
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-
 def handler(event, context):
-    logger.info('Handling event {} - context {}', event, context)
+    logging.info('Handling event {event} - context {context}')
 
     responseMessage = event['data']['response']['sms']
     errors = event['data']['errors']
