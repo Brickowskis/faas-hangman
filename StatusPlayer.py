@@ -21,6 +21,11 @@ def handler(event, context):
         if game['gameState'] == 'running':
             running_games.append(game)
 
+    if len(running_games) == 0:
+        response_message = append_message("", 'There is no running games')
+        event['data']['response']['sms'] = response_message
+        return event
+
     game = running_games[0]
     phone_number = event['data']['twilio']['From']
     response = player_table.get_item(
@@ -30,7 +35,11 @@ def handler(event, context):
         }
     )
 
-    # Get the number of lives remaining
+    if response.get("Item") is None:
+        response_message = append_message("", 'Player was not found')
+        event['data']['response']['sms'] = response_message
+        return event
+
     player_info = response['Item']
     guesses = json.loads(player_info['guesses'])
     lives_remaining = 6 - len(guesses['wrong'])
@@ -56,3 +65,6 @@ def handler(event, context):
 
     return event
 
+
+def append_message(response, message):
+    return f"{response}\n{message}"
