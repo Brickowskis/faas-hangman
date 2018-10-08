@@ -7,11 +7,11 @@ CRLB = "%0a"
 
 
 def handler(event, context):
-    logging.info('Handling event {} - context {}', event, context)
-    errors = event['data']['errors']
+    logging.info(f'Handling event {event} - context {context}')
 
     player_name = event['data']['command']['arguments'][0]
     phone_number = event['data']['twilio']['From']
+    errors = event["data"]["errors"]
 
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 
