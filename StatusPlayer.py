@@ -6,8 +6,9 @@ from boto3.dynamodb.conditions import Attr
 # https://support.twilio.com/hc/en-us/articles/223181468-How-do-I-Add-a-Line-Break-in-my-SMS-or-MMS-Message-
 CRLB = "%0a"
 
+
 def handler(event, context):
-    logging.info('Handling event {} - context {}', event, context)
+    logging.info(f'Handling event {event} - context {context}')
 
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
     player_table = dynamodb.Table('HangmanPlayer')
@@ -22,7 +23,7 @@ def handler(event, context):
             running_games.append(game)
 
     if len(running_games) == 0:
-        response_message = append_message("", 'There is no running games')
+        response_message = append_message("", 'There is no running game.')
         event['data']['response']['sms'] = response_message
         return event
 
@@ -44,6 +45,11 @@ def handler(event, context):
     guesses = json.loads(player_info['guesses'])
     lives_remaining = 6 - len(guesses['wrong'])
 
+    if lives_remaining == 0:
+        event['data']['game'] = game
+        event['data']['response']['sms'] = 'Sorry, you are out of guesses.'
+        return event
+
     # Get the current solution state
     current_solve_state = game['solution']
     unguessed_letters = (set(list(current_solve_state)) - set(list(guesses['correct'])))
@@ -55,9 +61,9 @@ def handler(event, context):
     response_message = event['data']['response']['sms']
     response_message = (
         f"{response_message}" +
-        f"\nLives Remaining [{lives_remaining}]" +
-        f"\nWord [{ current_solve_state }]" +
-        f"\nMisses [{guesses['wrong']}]"
+        f"\nLives:    { lives_remaining }" +
+        f"\nWord:     { current_solve_state } " +
+        f"\nMisses:   { guesses['wrong'] }"
     )
 
     event['data']['game'] = game
