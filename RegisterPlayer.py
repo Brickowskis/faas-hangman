@@ -1,15 +1,14 @@
-import logging, boto3
-
+import logging
+import boto3
 from boto3.dynamodb.conditions import Attr
 
 # https://support.twilio.com/hc/en-us/articles/223181468-How-do-I-Add-a-Line-Break-in-my-SMS-or-MMS-Message-
 CRLB = "%0a"
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
 
 
 def handler(event, context):
-    logger.info('Handling event {} - context {}', event, context)
+    logging.info('Handling event {} - context {}', event, context)
+    errors = event['data']['errors']
 
     player_name = event['data']['command']['arguments'][0]
     phone_number = event['data']['twilio']['From']
@@ -21,26 +20,32 @@ def handler(event, context):
 
     # Get the running game
     response = game_table.scan(
-        FilterExpression=Attr('gameState').ne('over')
+        FilterExpression=Attr('gameState').eq('created')
     )
-    running_games = list()
+    created_games = list()
     for game in response['Items']:
-        if game['gameState'] == 'running':
-            running_games.append(game)
+        if game['gameState'] == 'created':
+            created_games.append(game)
+
+    if len(created_games) == 0:
+        event['data']['response']['sms'] = f"Unfortunately, you can't register for the game at this time. " \
+                                           f"The game has either not been created or is already running."
+        return event
 
     # Register the player for the running game
-    game = running_games[0]
+    game = created_games[0]
     player_table.put_item(
         Item={
             'phoneNumber': phone_number,
             'gameId': game['Id'],
             'playerState': 'REGISTERED',
-            'playerName': player_name
+            'playerName': player_name,
+            'guesses': '{ \"correct\": [], \"wrong\" : [] }'
         }
     )
 
-    return build_response("Successfully registered")
+    event['data']['errors'] = errors
+    event['data']['game'] = game
+    event['data']['response']['sms'] = f'{player_name} you are registered!'
 
-
-def build_response(body):
-    return f'<?xml version="1.0" encoding="UTF-8"?><Response><Sms>{body}</Sms></Response>'
+    return event
