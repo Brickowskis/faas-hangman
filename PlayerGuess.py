@@ -13,7 +13,7 @@ def handler(event, context):
     guess = event['data']['command']['arguments'][0]
     from_number = event['data']['twilio']['From']
 
-    logging.info("Received guess {} from {}", guess, from_number)
+    logging.info(f"Received guess {guess} from {from_number}")
 
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
     game_table = dynamodb.Table('HangmanGame')
