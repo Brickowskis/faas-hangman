@@ -71,7 +71,7 @@ def process_guess(game, player, guess, player_table):
             guesses['correct'] = correct_guesses
             update_guesses(player, json.dumps(guesses), player_table)
             mark_winner(player, player_table)
-        elif guess in solution:
+        elif len(guess) == 1 and guess in solution:
             correct_guesses.append(guess)
             guesses['correct'] = correct_guesses
             update_guesses(player, json.dumps(guesses), player_table)
