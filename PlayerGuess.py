@@ -8,6 +8,8 @@ from boto3.dynamodb.conditions import Attr
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+ALLOWED_MISSES = 6
+
 
 def handler(event, context):
     guess = event['data']['command']['arguments'][0]
@@ -31,7 +33,7 @@ def handler(event, context):
     )
     player = retrieve_game(gamePlayer)
 
-    if game is not None and player is not None:
+    if game is not None and player is not None and player_is_alive(player):
         process_guess(game, player, guess, player_table)
 
     return event
@@ -49,6 +51,13 @@ def retrieve_player(game_player):
         return None
     else:
         return game_player['Items'][0]
+
+
+def player_is_alive(game_player):
+    guesses = json.loads(game_player['guesses'])
+    if len(guesses['wrong']) < ALLOWED_MISSES:
+        return True
+    return False
 
 
 def process_guess(game, player, guess, player_table):
