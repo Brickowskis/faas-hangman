@@ -9,10 +9,10 @@ CRLB = "%0a"
 def handler(event, context):
     logging.info(f'Handling event {event} - context {context}')
 
-    if len(event['data']['command']['argument']) == 0:
+    if len(event['data']['command']['arguments']) == 0:
         event['data']['response']['sms'] = f"Please enter a valid player name."
         return event
-    player_name = event['data']['command']['arguments'].join(" ")
+    player_name = " ".join(event['data']['command']['arguments'])
     phone_number = event['data']['twilio']['From']
     errors = event["data"]["errors"]
 
