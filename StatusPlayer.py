@@ -45,12 +45,7 @@ def handler(event, context):
     guesses = json.loads(player_info['guesses'])
     lives_remaining = 6 - len(guesses['wrong'])
 
-    if lives_remaining == 0:
-        event['data']['game'] = game
-        event['data']['response']['sms'] = 'Sorry, you are out of guesses.'
-        return event
-
-    # Get the current solution state
+    #Get the current solution state
     current_solve_state = game['solution']
     unguessed_letters = (set(list(current_solve_state)) - set(list(guesses['correct'])))
     for letter in unguessed_letters:
@@ -62,6 +57,9 @@ def handler(event, context):
     if player_info['playerState'] == 'WINNER':
         response_message = f"{response_message} + WINNER!"
         current_solve_state = game['solution']
+
+    if player_info['playerState'] == 'DEAD':
+        response_message = f"{response_message} + Sorry, you are now dead!"
 
     current_solve_state = " ".join(current_solve_state.upper())
     response_message = (
