@@ -2,9 +2,7 @@
   "input": {
     "data": {
       "command": {
-        "arguments": [
-          "l"
-        ]
+        "arguments": "q"
       },
       "game": {
       },
@@ -33,7 +31,7 @@
         "NumSegments": "1",
         "MessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
         "AccountSid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "From": "+16104056406",
+        "From": "+16103577793",
         "ApiVersion": "2010-04-01"
       }
     }

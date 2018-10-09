@@ -5,7 +5,7 @@
         "type": "player",
         "operation": "register",
         "arguments": [
-          "Ice Man"
+          "IceMan"
         ]
       },
       "game": {

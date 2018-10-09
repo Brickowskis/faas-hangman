@@ -5,8 +5,14 @@ import unittest
 
 class TestStringMethods(unittest.TestCase):
 
-    def test_playerGuess(self):
+    def test_playerGuessLetter(self):
         input = self.loadEvent("./test/resources/test-Router-Player-GuessLetter.json")
+        event = PlayerGuess.handler(input["input"], {})
+        print(event)
+        #self.assertEqual(event["data"]["game"]["gameState"], "running")
+
+    def test_playerGuessWorld(self):
+        input = self.loadEvent("./test/resources/test-Router-Player-GuessWord.json")
         event = PlayerGuess.handler(input["input"], {})
         print(event)
         #self.assertEqual(event["data"]["game"]["gameState"], "running")
