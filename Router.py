@@ -1,7 +1,8 @@
-import logging
-
+import logging, boto3
 
 def handler(event, context):
+    logging.info(f'Handling event {event} - context {context}')
+
     to_number = event['data']['twilio']['To']
     from_number = event['data']['twilio']['From']
     body = event['data']['twilio']['Body']
@@ -35,5 +36,14 @@ def handler(event, context):
 
 
 def isAdminNumber(from_number):
-    #                       Trevor          Tim             John
-    return from_number in ['+13025109165', '+16104056406', '+16103577793']
+    ssm = boto3.client('ssm')
+
+    response = ssm.get_parameters(
+        Names=[
+            '/admin/phoneNumbers'
+        ],
+        WithDecryption=False
+    )
+    numberStr = response['Parameters'][0]['Value']
+    adminNumbers = [number.strip() for number in numberStr.split(',')]
+    return from_number in adminNumbers
