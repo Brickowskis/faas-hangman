@@ -56,9 +56,14 @@ def handler(event, context):
     for letter in unguessed_letters:
         current_solve_state = current_solve_state.replace(letter, "_")
 
-    current_solve_state = " ".join(current_solve_state.upper())
     # Build the response message
     response_message = event['data']['response']['sms']
+
+    if player_info['playerState'] == 'WINNER':
+        response_message = f"{response_message} + WINNER!"
+        current_solve_state = game['solution']
+
+    current_solve_state = " ".join(current_solve_state.upper())
     response_message = (
         f"{response_message}" +
         f"\nLives:    { lives_remaining }" +

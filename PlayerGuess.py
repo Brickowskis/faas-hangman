@@ -81,6 +81,8 @@ def process_guess(game, player, guess, player_table):
             wrong_guesses.append(guess)
             guesses['wrong'] = wrong_guesses
             update_guesses(player, json.dumps(guesses), player_table)
+            if len(guesses['wrong']) == 6:
+                mark_player_dead(player, player_table)
 
 
 def update_guesses(player, guesses, player_table):
@@ -106,6 +108,19 @@ def mark_winner(player, player_table):
         UpdateExpression='SET playerState = :ps',
         ExpressionAttributeValues={
             ':ps': 'WINNER'
+        }
+    )
+
+
+def mark_player_dead(player, player_table):
+    player_table.update_item(
+        Key={
+            'phoneNumber': player['phoneNumber'],
+            'gameId': player['gameId']
+        },
+        UpdateExpression='SET playerState = :ps',
+        ExpressionAttributeValues={
+            ':ps': 'DEAD'
         }
     )
 
