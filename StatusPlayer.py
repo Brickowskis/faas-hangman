@@ -55,7 +55,7 @@ def handler(event, context):
     response_message = event['data']['response']['sms']
 
     if player_info['playerState'] == 'WINNER':
-        response_message = f"{response_message} + WINNER!"
+        response_message = f"{response_message} WINNER!"
         current_solve_state = game['solution']
 
     if player_info['playerState'] == 'DEAD':
