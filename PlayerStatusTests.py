@@ -1,4 +1,4 @@
-import StatusPlayer
+import PlayerStatus
 import json
 import unittest
 
@@ -7,7 +7,7 @@ class TestStringMethods(unittest.TestCase):
 
     def test_statusPlayer(self):
         input = self.loadEvent("./test/resources/test-StatusPlayer-input-01.json")
-        event = StatusPlayer.handler(input["input"], {})
+        event = PlayerStatus.handler(input["input"], {})
         print(event)
         #self.assertEqual(event["data"]["game"]["gameState"], "running")
 
