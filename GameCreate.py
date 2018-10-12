@@ -31,7 +31,7 @@ def handler(event, context):
             responseMessage = append_message(responseMessage, 'Game created')
         except ClientError as e:
             errors = e
-            responseMessage = append_message(responseMessage, f'Error [{e}]')
+            responseMessage = append_message(responseMessage, f'Error: You do not have permission to create a game')
 
     if len(runningGames) == 1:
         game = runningGames[0]

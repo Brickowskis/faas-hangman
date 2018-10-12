@@ -31,7 +31,7 @@ def handler(event, context):
             responseMessage = append_message(responseMessage, 'Game stopped', game)
         except ClientError as e:
             errors = e
-            responseMessage = append_message(responseMessage, f'Error [{e}]')
+            responseMessage = append_message(responseMessage, f'Error: You do not have permission to stop a game')
 
     elif len(createdGames) == 1:
         game = createdGames[0]
