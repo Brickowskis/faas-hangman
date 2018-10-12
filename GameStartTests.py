@@ -1,11 +1,11 @@
-import unittest, json, StartGame
+import unittest, json, GameStart
 
 class TestStringMethods(unittest.TestCase):
 
     def test_handlerWithGameOver(self):
         #Pre-condition - HangmanGame table must be created and empty
         input = self.loadEvent("./test/resources/test-StartGame-input-01.json")
-        event = StartGame.handler(input["input"], {})
+        event = GameStart.handler(input["input"], {})
         print(event)
         self.assertEqual(event["data"]["game"]["gameState"], "running")
 
