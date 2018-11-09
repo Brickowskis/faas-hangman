@@ -17,7 +17,7 @@
       "response": {
         "sms": "\nActive running game:\nId [8421ff6f-256d-4a9a-b4e7-eaab4d8d4e55]\nStart Datetime [2018-09-05T00:57:50.387851]\nGame State [running]\nSolution [prototypes]"
       },
-      "twilio": {
+      "sms": {
         "ToCountry": "US",
         "ToState": "DE",
         "SmsMessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
@@ -30,12 +30,12 @@
         "FromCity": "NORRISTOWN",
         "Body": "stop game",
         "FromCountry": "US",
-        "To": "+13027322185",
+        "To": "13027322185",
         "ToZip": "19945",
         "NumSegments": "1",
         "MessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
         "AccountSid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "From": "+16104056406",
+        "From": "16104056406",
         "ApiVersion": "2010-04-01"
       }
     }

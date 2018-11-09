@@ -23,7 +23,7 @@
             "command",
             "game",
             "player",
-            "twilio"
+            "sms"
           ],
           "properties": {
             "command": {
@@ -148,7 +148,7 @@
                   "title": "The Id Schema",
                   "default": "",
                   "examples": [
-                    "+19998887777"
+                    "19998887777"
                   ],
                   "pattern": "^(.*)$"
                 },
@@ -196,7 +196,7 @@
                 }
               }
             },
-            "twilio": {
+            "sms": {
               "$id": "#/properties/input/properties/data/properties/twilio",
               "type": "object",
               "title": "The Twilio Schema",
@@ -348,7 +348,7 @@
                   "title": "The To Schema",
                   "default": "",
                   "examples": [
-                    "+13027322185"
+                    "13027322185"
                   ],
                   "pattern": "^(.*)$"
                 },
@@ -398,7 +398,7 @@
                   "title": "The From Schema",
                   "default": "",
                   "examples": [
-                    "+16104056406"
+                    "16104056406"
                   ],
                   "pattern": "^(.*)$"
                 },

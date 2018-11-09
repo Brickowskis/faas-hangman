@@ -17,7 +17,7 @@
         "solution": "ABCDEFGHIJKLMNOPQRST"
       },
       "player": {
-        "id": "+19998887777",
+        "id": "19998887777",
         "guesses": [
           "A",
           "B",
@@ -30,7 +30,7 @@
         "state": "registered|live|dead|winner",
         "dateTime": "2018-10-14T10:21:45.07Z"
       },
-      "twilio": {
+      "sms": {
         "ToCountry": "US",
         "ToState": "DE",
         "SmsMessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
@@ -43,12 +43,12 @@
         "FromCity": "NORRISTOWN",
         "Body": "Hi Brian",
         "FromCountry": "US",
-        "To": "+13027322185",
+        "To": "13027322185",
         "ToZip": "19945",
         "NumSegments": "1",
         "MessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
         "AccountSid": "ACfe8d611a7b2bf7b16f84c4af5ff98b11",
-        "From": "+16104056406",
+        "From": "16104056406",
         "ApiVersion": "2010-04-01"
       }
     }

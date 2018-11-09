@@ -13,7 +13,7 @@ ALLOWED_MISSES = 6
 
 def handler(event, context):
     guess = event['data']['command']['arguments']
-    from_number = event['data']['twilio']['From']
+    from_number = event['data']['sms']['From']
 
     logging.info(f"Received guess {guess} from {from_number}")
 

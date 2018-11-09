@@ -1,13 +1,9 @@
 import logging, boto3
 from twilio.rest import Client
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-
 def handler(event, context):
     ssm = boto3.client('ssm')
-    logger.info(f'Handling event {event} - context {context}')
+    logging.info(f'Handling event {event} - context {context}')
 
     errors = event['data']['errors']
     responseMessage = event['data']['response']['sms']
@@ -37,6 +33,6 @@ def handler(event, context):
     )
 
     if (message.error_code != None):
-        logger.error('Error sending Twilio  message : code{} - message {}', message.error_code, message.error_message)
+        logging.error('Error sending Twilio  message : code{} - message {}', message.error_code, message.error_message)
 
     return event
