@@ -1,0 +1,26 @@
+{
+  "input": {
+    "data": {
+      "command": {
+        "type": "admin",
+        "operation": "game",
+        "arguments": [
+          "stop"
+        ]
+      },
+      "game": {
+      },
+      "player": {
+      },
+      "errors": {
+      },
+      "response": {
+        "sms": "This sms was sent from NexmoResponder that pulls account sid and auth token from AWS SSM Parameter Store"
+      },
+      "sms": {
+        "To": "16104056406",
+        "From": "13025254815"
+      }
+    }
+  }
+}

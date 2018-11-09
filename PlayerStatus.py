@@ -28,7 +28,7 @@ def handler(event, context):
         return event
 
     game = running_games[0]
-    phone_number = event['data']['twilio']['From']
+    phone_number = event['data']['sms']['From']
     response = player_table.get_item(
         Key={
             'phoneNumber': phone_number,

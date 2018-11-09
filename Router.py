@@ -3,9 +3,9 @@ import logging, boto3
 def handler(event, context):
     logging.info(f'Handling event {event} - context {context}')
 
-    to_number = event['data']['twilio']['To']
-    from_number = event['data']['twilio']['From']
-    body = event['data']['twilio']['Body']
+    to_number = event['data']['sms']['To']
+    from_number = event['data']['sms']['From']
+    body = event['data']['sms']['Body']
 
     logging.info(f'Messaged directed to {to_number} from {from_number} with body {body}')
 
@@ -17,7 +17,7 @@ def handler(event, context):
         event['data']['command']['operation'] = 'game'
         event['data']['command']['arguments'] = body.split()[1:]
         if not isAdminNumber(from_number):
-            event['data']['errors'] = SystemError(f"{from_number} does not have admin access.")
+            event['data']['errors'] = 'You do not have permission to execute this command.'
             event['data']['response']['sms'] = 'You do not have permission to execute this command.'
     elif action == 'register':
         event['data']['command']['type'] = 'player'

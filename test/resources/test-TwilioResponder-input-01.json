@@ -17,7 +17,7 @@
       "response": {
         "sms": "This sms was sent from TwilioResponder that pulls account sid and auth token from AWS SSM Parameter Store"
       },
-      "twilio": {
+      "sms": {
         "ToCountry": "US",
         "ToState": "DE",
         "SmsMessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
@@ -30,12 +30,12 @@
         "FromCity": "NORRISTOWN",
         "Body": "stop game",
         "FromCountry": "US",
-        "To": "+13027322185",
+        "To": "13027322185",
         "ToZip": "19945",
         "NumSegments": "1",
         "MessageSid": "SMa0953d6b15d49da19c2a2cbdd78badd1",
         "AccountSid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "From": "+16104056406",
+        "From": "16104056406",
         "ApiVersion": "2010-04-01"
       }
     }

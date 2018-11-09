@@ -3,10 +3,10 @@ import Router, json, unittest
 
 class TestIsAdminNumber(unittest.TestCase):
     def test_isAdminNumber_False(self):
-        self.assertFalse(Router.isAdminNumber('+11234567890'))
+        self.assertFalse(Router.isAdminNumber('11234567890'))
 
     def test_isAdminNumber_True(self):
-        self.assertTrue(Router.isAdminNumber('+13025109165'))
+        self.assertTrue(Router.isAdminNumber('13025109165'))
 
 
 class TestLambdaHandler(unittest.TestCase):

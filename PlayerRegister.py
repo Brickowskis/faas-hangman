@@ -13,7 +13,7 @@ def handler(event, context):
         event['data']['response']['sms'] = f"Please enter a valid player name."
         return event
     player_name = " ".join(event['data']['command']['arguments'])
-    phone_number = event['data']['twilio']['From']
+    phone_number = event['data']['sms']['From']
     errors = event["data"]["errors"]
 
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')

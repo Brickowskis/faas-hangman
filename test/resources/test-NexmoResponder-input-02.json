@@ -1,0 +1,26 @@
+{
+  "input": {
+    "data": {
+      "command": {
+        "type": "admin",
+        "operation": "game",
+        "arguments": [
+          "stop"
+        ]
+      },
+      "game": {
+      },
+      "player": {
+      },
+      "errors": {
+      },
+      "response": {
+        "sms": "\nActive running game:\nId [8421ff6f-256d-4a9a-b4e7-eaab4d8d4e55]\nStart Datetime [2018-09-05T00:57:50.387851]\nGame State [running]\nSolution [prototypes]"
+      },
+      "sms": {
+        "To": "16104056406",
+        "From": "13025254815"
+      }
+    }
+  }
+}
